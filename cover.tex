@@ -1,0 +1,87 @@
+% !TEX TS-program = XeLaTeX      Must use XeLaTeX to compile
+% !TEX encoding = UTF-8 Unicode  File must be encoded at UTF-8
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+
+\usepackage[rgb]{xcolor}
+
+%\setmainfont{DejaVu Serif}
+\setmainfont{FreeSerif}
+%\setmainfont{VL PGothic}
+\definecolor{programming}{HTML}{C70093}
+\definecolor{linux}{HTML}{920F02}
+
+
+\usepackage{xfp}
+\usepackage[a5paper]{geometry}
+% a5 paper is 14.81 x 21.01 cm
+\geometry{}
+\pagenumbering{gobble}
+
+\begin{document}
+\newcommand{\pttocm}{0.0352778}
+
+%\newfontfamily\oreilly{VL PGothic}
+\newfontfamily\oreilly{IPAexGothic}
+
+
+% NB in centimeters
+\newcommand{\bcolor}{linux}  % banner color
+\newcommand{\bmargin}{1}           % banner xoffset
+\newcommand{\bheight}{0.4}
+\newcommand{\bwidth}{\fpeval{round(\paperwidth * \pttocm -\bmargin*2)}}
+
+% top banner
+% centering text
+% https://www.reddit.com/r/LaTeX/comments/s1sx1w/tikz_centering_text_from_a_node/
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}]
+    \filldraw [fill=\bcolor, draw=white] (\bmargin, 0.1) rectangle ++(\bwidth, -\bheight);
+
+    \node[anchor=north,font=\itshape] at ($(current page.north) + (0cm,-0.3cm)$)
+        {\large What has never worked can never be lost};
+
+\end{tikzpicture}
+
+
+% animal
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}]
+    \node[anchor=north] at ($(current page.north) + (0.5cm,-4.2*\bheight)$)
+    {\includegraphics[height=0.65\textheight]{./img/sunwave}};
+\end{tikzpicture}
+
+
+% title
+\newcommand{\toffset}{\fpeval{\paperheight * 0.55 * \pttocm * -1}}
+\newcommand{\theight}{\fpeval{round(\paperheight * 0.3 * \pttocm)}}
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=0cm]
+    \filldraw [fill=\bcolor, draw=white] (\bmargin, \toffset) rectangle ++(\bwidth, -\theight);
+
+    \node[anchor=north west, font=\itshape] at ($(current page.north west) + (\bmargin*1.1, \toffset+1.1*\bmargin)$)
+        {\Huge Navigating};
+    \node[anchor=north west, text=white, scale=3, text width=\bwidth] at ($(current page.north west) + (\bmargin*1.3, 1.04*\toffset)$)
+        {\Huge Legacy Code};
+    \node[anchor=north west, font=\itshape] at ($(current page.north west) + (\bwidth*0.78, \toffset-\theight-0.65*\bheight)$)
+        {\Large advanced rm -rf *};
+
+    \node[anchor=north west] at ($(current page.south west) + (\bmargin, 3*\bheight)$)
+        {\Large \oreilly O'REILLY\small$^\textsuperscript{\textregistered}$};
+
+    % TODO there must be a better way; how to justify text in the node?
+    \node[anchor=north west, font=\itshape] at ($(current page.south west) + (\bwidth*0.87, 3*\bheight)$)
+        {\large Michael Teresi};
+\end{tikzpicture}
+
+
+% TODO add O'REILLY
+% TODO add author
+
+
+%{\fontfamily{ppl}\selectfont ... }
+
+
+\end{document}

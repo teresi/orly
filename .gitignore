@@ -1,0 +1,35 @@
+# compiled
+**/*.aux
+**/*.log
+**/*.out
+**/*.synctex.gz
+**/*.toc
+**/*.pdf
+**/*.ppm
+**.*~
+**.*~*
+**.*dvi
+**.*fls
+**.*fdb_latexmk
+**.*swp
+**.*swo
+**.*idx
+**.*ilg
+**.*ind
+**-blx.bib
+**.bbl
+**.blg
+**.run.xml
+**.bcf
+**.maf
+**.mtc*
+**.xdv
+
+# acronym
+**.acn
+**.acr
+**.alg
+**.glg
+**.glo
+**.gls
+**.ist
