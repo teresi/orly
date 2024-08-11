@@ -1,0 +1,131 @@
+% !TEX TS-program = XeLaTeX      Must use XeLaTeX to compile
+% !TEX encoding = UTF-8 Unicode  File must be encoded at UTF-8
+
+% TODO use pst-barcode to add a fake barcode?
+% https://mirror.math.princeton.edu/pub/CTAN/graphics/pstricks/contrib/pst-barcode/doc/pst-barcode-doc.pdf
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\usepackage{tikz}
+\usepackage{pst-barcode}
+\usetikzlibrary{calc}
+\usepackage{lipsum}
+
+
+\usepackage[rgb]{xcolor}
+
+%\setmainfont{DejaVu Serif}
+\setmainfont{FreeSerif}
+\definecolor{linux}{HTML}{920F02}
+
+
+\usepackage{xfp}
+
+\usepackage[%
+	papersize={8.5in,11in},%
+]{geometry}
+
+\pagenumbering{gobble}
+
+
+
+\begin{document}
+
+% TODO just convert everything to pt and then appt pt to the call in tikz
+
+% Midori A5 notebook is 14.81 x 21.01 x 1.054 cm
+\newcommand{\pttocm}{0.0352778}             % points per centimeter
+\newcommand{\coverwidth}{14.8 / \pttocm}    % bookcover width
+\newcommand{\coverheight}{21.0 / \pttocm}   % bookcover height
+\newcommand{\spinewidth}{1.054 / \pttocm}   % bookcover spine width
+
+\newcommand{\pagewidth}{\fpeval{\coverwidth}}  % combined cover width
+\newcommand{\pageheight}{\coverheight}                           % combined cover height
+
+%\newfontfamily\oreilly{VL PGothic}
+\newfontfamily\oreilly{IPAexGothic}
+
+% NB in centimeters
+\newcommand{\bcolor}{linux}  % banner color
+\newcommand{\bmargin}{1 cm}           % banner xoffset  % TODO in cm, convert to pt
+\newcommand{\bheight}{0.4 cm}         % banner height   % TODO in cm, convert to pt
+\newcommand{\bwidth}{\fpeval{(\coverwidth * 0.85 * \pttocm)}cm}
+
+\newcommand{\xshift}{\fpeval{(\paperwidth - \pagewidth) * 0.5 * \pttocm}cm}
+\newcommand{\yshift}{\fpeval{(\paperheight - \pageheight) * 0.5 * \pttocm}cm}
+
+%%% FRAME %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% perimeter
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}]
+%    \draw[draw=black] (\xshift, -\yshift) rectangle ++(\pagewidth pt,-\pageheight pt);  % front cover
+%    \draw[draw=black] (\xshift, -\yshift) rectangle ++(\coverwidth pt, -\coverheight pt);  % back cover
+%    \draw[draw=black] (\xshift + 0.5*\coverwidth pt, -\yshift) rectangle ++(0, -\pageheight pt);  % back cover, midpoint
+\end{tikzpicture}
+
+
+% cut lines, vertical
+\newcommand{\cutoff}{24pt}
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xshift]
+    \draw[draw=black] (0, -\yshift + \cutoff)--(0, 0);
+    \draw[draw=black] (\pagewidth pt, -\yshift + \cutoff)--(\pagewidth pt, 0);
+
+    \draw[draw=black] (0, -\yshift-\coverheight pt -\cutoff)  --(0, -\paperheight);
+    \draw[draw=black] (\pagewidth pt, -\yshift-\coverheight pt -\cutoff)  --(\pagewidth pt, -\paperheight);
+\end{tikzpicture}
+
+% cut lines, horizontal
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, yshift=-\yshift]
+    \draw[draw=black] (\xshift -\cutoff, 0)--(0, 0);
+    \draw[draw=black] (\xshift + \pagewidth + \cutoff, 0)--(\paperwidth, 0);
+
+    \draw[draw=black] (\xshift -\cutoff, -\pageheight pt)--(0, -\pageheight pt);
+    \draw[draw=black] (\xshift + \pagewidth + \cutoff, -\pageheight pt)--(\paperwidth, -\pageheight pt);
+\end{tikzpicture}
+
+
+%%% FRONT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\xfrontshift}{\fpeval{\xshift}pt}
+
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-\yshift]
+    \filldraw [fill=\bcolor, draw=\bcolor] (\bmargin, 0) rectangle ++(\bwidth, -\bheight);
+\end{tikzpicture}
+
+% animal
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)} ]
+    \node[anchor=north] at ($(current page.north west) + (\xfrontshift, -\yshift) + (0.5*\coverwidth pt, -4.0*\bheight)$)
+    {\includegraphics[height=9cm]{./img/sunwave}};
+\end{tikzpicture}
+
+% title
+\newcommand{\toffset}{\fpeval{\coverheight * 0.55 * -1}}
+\newcommand{\theight}{\fpeval{round(\coverheight * 0.3 )}}
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-\yshift]
+
+    \filldraw [fill=\bcolor, draw=white] (\bmargin, \toffset pt) rectangle ++(\bwidth, -\theight pt);
+
+    \node[anchor=north west, font=\itshape, scale=1.1] at ($(current page.north west) + (\xfrontshift, -\yshift) + (\bmargin*1.1, \toffset+1.1*\bmargin)$)
+        {\Huge Navigating};
+
+    \node[anchor=north west, text=white, scale=3, text width=0.9*\bwidth] at ($(current page.north west) + (\xfrontshift, -\yshift) + (\bmargin*1.2, \toffset pt - 0.6*\bmargin)$)
+        {\Huge Legacy\\ Code};
+
+    \node[anchor=north west, font=\itshape] at ($(current page.north west) + (\xfrontshift, -\yshift) + (\bwidth*0.77, \toffset-\theight-0.65*\bheight)$)
+        {\Large advanced rm -rf *};
+
+    \node[anchor=north west] at ($(current page.south west) + (\xfrontshift, \yshift) + (\bmargin, 3*\bheight)$)
+        {\huge \oreilly O'RLY\small$^\textsuperscript{\textregistered}$};
+
+    % TODO there must be a better way; how to justify text in the node?
+    \node[anchor=north west, font=\itshape] at ($(current page.south west) + (\xfrontshift, \yshift) + (\bwidth*0.72, 3*\bheight)$)
+        {\huge Michael Teresi};
+
+    \node[anchor=north west, font=\itshape] at ($(current page.north west) + (\xfrontshift, -\yshift) + (\bwidth*0.3, -\bheight)$)
+        {\large What has never worked can never be lost};
+
+\end{tikzpicture}
+
+
+\end{document}

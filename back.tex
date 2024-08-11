@@ -1,0 +1,119 @@
+% !TEX TS-program = XeLaTeX      Must use XeLaTeX to compile
+% !TEX encoding = UTF-8 Unicode  File must be encoded at UTF-8
+
+% TODO use pst-barcode to add a fake barcode?
+% https://mirror.math.princeton.edu/pub/CTAN/graphics/pstricks/contrib/pst-barcode/doc/pst-barcode-doc.pdf
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\usepackage{tikz}
+\usepackage{pst-barcode}
+\usetikzlibrary{calc}
+\usepackage{lipsum}
+
+
+\usepackage[rgb]{xcolor}
+
+%\setmainfont{DejaVu Serif}
+\setmainfont{FreeSerif}
+\definecolor{linux}{HTML}{920F02}
+
+
+\usepackage{xfp}
+
+\usepackage[%
+	papersize={8.5in,11in},%
+]{geometry}
+
+\pagenumbering{gobble}
+
+
+
+\begin{document}
+
+% TODO just convert everything to pt and then appt pt to the call in tikz
+
+% Midori A5 notebook is 14.81 x 21.01 x 1.054 cm
+\newcommand{\pttocm}{0.0352778}             % points per centimeter
+\newcommand{\coverwidth}{14.8 / \pttocm}    % bookcover width
+\newcommand{\coverheight}{21.0 / \pttocm}   % bookcover height
+\newcommand{\spinewidth}{1.054 / \pttocm}   % bookcover spine width
+
+\newcommand{\pagewidth}{\fpeval{\coverwidth}}  % combined cover width
+\newcommand{\pageheight}{\coverheight}                           % combined cover height
+
+%\newfontfamily\oreilly{VL PGothic}
+\newfontfamily\oreilly{IPAexGothic}
+
+% NB in centimeters
+\newcommand{\bcolor}{linux}  % banner color
+\newcommand{\bmargin}{1 cm}           % banner xoffset  % TODO in cm, convert to pt
+\newcommand{\bheight}{0.4 cm}         % banner height   % TODO in cm, convert to pt
+\newcommand{\bwidth}{\fpeval{(\coverwidth * 0.85 * \pttocm)}cm}
+
+\newcommand{\xshift}{\fpeval{(\paperwidth - \pagewidth) * 0.5 * \pttocm}cm}
+\newcommand{\yshift}{\fpeval{(\paperheight - \pageheight) * 0.5 * \pttocm}cm}
+
+%%% FRAME %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% perimeter
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}]
+%    \draw[draw=black] (\xshift, -\yshift) rectangle ++(\pagewidth pt,-\pageheight pt);  % front cover
+%    \draw[draw=black] (\xshift, -\yshift) rectangle ++(\coverwidth pt, -\coverheight pt);  % back cover
+%    \draw[draw=black] (\xshift + 0.5*\coverwidth pt, -\yshift) rectangle ++(0, -\pageheight pt);  % back cover, midpoint
+\end{tikzpicture}
+
+
+% cut lines, vertical
+\newcommand{\cutoff}{24pt}
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xshift]
+    \draw[draw=black] (0, -\yshift + \cutoff)--(0, 0);
+    \draw[draw=black] (\pagewidth pt, -\yshift + \cutoff)--(\pagewidth pt, 0);
+
+    \draw[draw=black] (0, -\yshift-\coverheight pt -\cutoff)  --(0, -\paperheight);
+    \draw[draw=black] (\pagewidth pt, -\yshift-\coverheight pt -\cutoff)  --(\pagewidth pt, -\paperheight);
+\end{tikzpicture}
+
+% cut lines, horizontal
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, yshift=-\yshift]
+    \draw[draw=black] (\xshift -\cutoff, 0)--(0, 0);
+    \draw[draw=black] (\xshift + \pagewidth + \cutoff, 0)--(\paperwidth, 0);
+
+    \draw[draw=black] (\xshift -\cutoff, -\pageheight pt)--(0, -\pageheight pt);
+    \draw[draw=black] (\xshift + \pagewidth + \cutoff, -\pageheight pt)--(\paperwidth, -\pageheight pt);
+\end{tikzpicture}
+
+
+
+%%% BACKCOVER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% top banner
+% centering text
+% https://www.reddit.com/r/LaTeX/comments/s1sx1w/tikz_centering_text_from_a_node/
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xshift, yshift=-\yshift]
+
+    \node[anchor=north west] at ($(current page.north west) + (\xshift, -\yshift) + (\bmargin, -1*\bheight)$)
+        {Unix Programming};
+
+    \node[anchor=north west] at ($(current page.north west) + (\xshift, -\yshift) + (0.4*\coverwidth pt, -1.8*\bheight)$)
+        {\huge \oreilly O'RLY\small$^\textsuperscript{\textregistered}$};
+
+    \filldraw [fill=\bcolor, draw=\bcolor] (\bmargin, -4*\bheight) rectangle ++(\bwidth, -\bheight);
+
+    \node[anchor=north west] at ($(current page.north west) + (\xshift, -\yshift) + (\bmargin, -5.5*\bheight)$)
+        {\huge \textbf Navigating Legacy Code};
+
+    \node[anchor=north west, text width=\bwidth] at ($(current page.north west) + (\xshift, -\yshift) + (\bmargin, -7.75*\bheight)$)
+        {\lipsum[3-4]};
+\end{tikzpicture}
+
+% barcode
+% NOTE something is wrong with the coordinates of the barcode, it doesn't respect the units or location
+% placing it through trial and error
+\begin{pspicture}(0,0)
+    \psbarcode[transy=-18.4cm, transx=0.4cm]{0080085}{includetext height=0.4 width=0.8}{upce}
+\end{pspicture}
+
+
+
+\end{document}
