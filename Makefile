@@ -1,15 +1,24 @@
 #!/usr/bin/make -f
 
+# compile the covers
+
+# requires xelatex
+
 
 MAKEFLAGS += --no-print-directory
+
 _root_dir := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+_src := $(wildcard *.tex)
+_obj := $(patsubst %.tex, %.pdf, $(_src))
 
-all:
-	make -ik dust_cover.pdf
 
-%.pdf: %.tex
+all: $(_obj)
+
+
+%.pdf: %.tex orly.cls
 	max_print_line=96 latexmk -xelatex -time -use-make $<
 
+
 .PHONY: clean
-clean:  ## remove temporary files
-	latexmk -f -C dust_cover.pdf
+clean:
+	latexmk -f -C *.pdf

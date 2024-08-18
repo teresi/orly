@@ -4,60 +4,15 @@
 % TODO use pst-barcode to add a fake barcode?
 % https://mirror.math.princeton.edu/pub/CTAN/graphics/pstricks/contrib/pst-barcode/doc/pst-barcode-doc.pdf
 
-\documentclass{article}
-\usepackage{graphicx}
-\usepackage{fontspec}
-\usepackage{tikz}
-\usepackage{pst-barcode}
-\usetikzlibrary{calc}
-\usepackage{lipsum}
+\documentclass[
+    papersize={17in,11in}
+]{orly}
 
-
-\usepackage[rgb]{xcolor}
-
-%\setmainfont{DejaVu Serif}
-\setmainfont{FreeSerif}
-\definecolor{linux}{HTML}{920F02}
-
-
-\usepackage{xfp}
-
-\usepackage[%
-	papersize={17in,11in},%
-]{geometry}
-
-\pagenumbering{gobble}
-
+\renewcommand{\pagewidth}{\fpeval{\coverwidth * 2 + \spinewidth}}  % combined cover width
+\renewcommand{\pageheight}{\coverheight}                            % combined cover height
 
 
 \begin{document}
-
-% TODO just convert everything to pt and then appt pt to the call in tikz
-
-% Midori A5 notebook is 14.81 x 21.01 x 1.054 cm
-\newcommand{\pttocm}{0.0352778}             % points per centimeter
-\newcommand{\coverwidth}{14.8 / \pttocm}    % bookcover width
-\newcommand{\coverheight}{21.0 / \pttocm}   % bookcover height
-\newcommand{\spinewidth}{1.054 / \pttocm}   % bookcover spine width
-
-\newcommand{\sheetwidth}{\fpeval{\paperwidth}}    % print width
-\newcommand{\sheetheight}{\fpeval{\paperheight}}  % print height
-
-\newcommand{\pagewidth}{\fpeval{\coverwidth * 2 + \spinewidth}}  % combined cover width
-\newcommand{\pageheight}{\coverheight}                            % combined cover height
-
-%\newfontfamily\oreilly{VL PGothic}
-\newfontfamily\oreilly{IPAexGothic}
-
-
-% NB in centimeters
-\newcommand{\bcolor}{linux}  % banner color
-\newcommand{\bmargin}{1 cm}           % banner xoffset  % TODO in cm, convert to pt
-\newcommand{\bheight}{0.4 cm}         % banner height   % TODO in cm, convert to pt
-\newcommand{\bwidth}{\fpeval{(\coverwidth * 0.85 * \pttocm)}cm}
-
-\newcommand{\xshift}{\fpeval{(\paperwidth - \pagewidth) * 0.5 * \pttocm}cm}
-\newcommand{\yshift}{\fpeval{(\paperheight - \pageheight) * 0.5 * \pttocm}cm}
 
 %%% FRAME %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -67,6 +22,7 @@
 %    \draw[draw=black] (\xshift, -\yshift) rectangle ++(\coverwidth pt, -\coverheight pt);  % back cover
 %    \draw[draw=black] (\xshift + 0.5*\coverwidth pt, -\yshift) rectangle ++(0, -\pageheight pt);  % back cover, midpoint
 \end{tikzpicture}
+
 
 % cut lines, vertical
 \begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xshift]
