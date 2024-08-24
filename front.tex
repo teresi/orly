@@ -8,68 +8,53 @@
 \begin{document}
 
 
+%%% MEASUREMENTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% front offset
+% redefine this if using in the dust cover
+\renewcommand{\xfrontshift}{\fpeval{\xshift}pt}
+
+
 %%% FRAME %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% perimeter
-\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}]
-%    \draw[draw=black] (\xshift, -\yshift) rectangle ++(\pagewidth pt,-\pageheight pt);  % front cover
-%    \draw[draw=black] (\xshift, -\yshift) rectangle ++(\coverwidth pt, -\coverheight pt);  % back cover
-%    \draw[draw=black] (\xshift + 0.5*\coverwidth pt, -\yshift) rectangle ++(0, -\pageheight pt);  % back cover, midpoint
-\end{tikzpicture}
-
-
+\showframe
 \cutlines
+
+\rulercircle{0.5*\xfrontshift}{-0.5*\yshift}
+\rulerhorz{0.5 cm}{-1.5 cm-\yshift-\coverheight}
+\rulervert{1.5 cm+\xfrontshift+\coverwidth}{-0.5 cm}
+
 
 %%% FRONT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\xfrontshift}{\fpeval{\xshift}pt}
-
-\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-\yshift]
-    \filldraw [fill=\bcolor, draw=\bcolor] (\bmargin, 0) rectangle ++(\bwidth, -\bheight);
-\end{tikzpicture}
+\topbanner
+\titlebanner
 
 % animal
-\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)} ]
-    \node[anchor=north] at ($(current page.north west) + (\xfrontshift, -\yshift) + (0.5*\coverwidth pt, -4.0*\bheight)$)
-    {\includegraphics[height=9cm]{./img/sunwave}};
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-\yshift]
+    \node[anchor=north] at + ($(0.5*\coverwidth pt, -3.7*\bheight)$)
+    {\includegraphics[height=8.5cm]{./img/sunwave}};
 \end{tikzpicture}
 
-% title
-\newcommand{\toffset}{\fpeval{\coverheight * 0.55 * -1}}
-\newcommand{\theight}{\fpeval{round(\coverheight * 0.3 )}}
+
 \begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-\yshift]
 
-    \filldraw [fill=\bcolor, draw=white] (\bmargin, \toffset pt) rectangle ++(\bwidth, -\theight pt);
-
-    \node[anchor=north west, font=\itshape, scale=1.1] at ($(current page.north west) + (\xfrontshift, -\yshift) + (\bmargin*1.1, \toffset+1.1*\bmargin)$)
+    \node[anchor=north west, font=\itshape, scale=1.2] at + ($(\bmargin, \titleoffset+1*\bmargin)$)
         {\Huge Navigating};
 
-    \node[anchor=north west, text=white, scale=3, text width=0.9*\bwidth] at ($(current page.north west) + (\xfrontshift, -\yshift) + (\bmargin*1.2, \toffset pt - 0.6*\bmargin)$)
+    \node[anchor=north west, text=white, scale=3, text width=0.9*\bwidth] at + ($(\bmargin*1.2, \titleoffset pt - 0.5*\bmargin)$)
         {\Huge Legacy\\ Code};
 
-    \node[anchor=north west, font=\itshape] at ($(current page.north west) + (\xfrontshift, -\yshift) + (\bwidth*0.77, \toffset-\theight-0.65*\bheight)$)
+    \node[anchor=north west, font=\itshape] at + ($(\bwidth*0.77, \titleoffset-\titleheight-0.65*\bheight)$)
         {\Large advanced rm -rf *};
 
     \node[anchor=north west] at ($(current page.south west) + (\xfrontshift, \yshift) + (\bmargin, 3*\bheight)$)
         {\huge \oreilly O'RLY\small$^\textsuperscript{\textregistered}$};
 
     % TODO there must be a better way; how to justify text in the node?
-    \node[anchor=north west, font=\itshape] at ($(current page.south west) + (\xfrontshift, \yshift) + (\bwidth*0.72, 3*\bheight)$)
+    \node[anchor=north west, font=\itshape] at ($(current page.south west) + (\xfrontshift, \yshift) + (\bwidth*0.74, 3*\bheight)$)
         {\huge Michael Teresi};
-
-    \node[anchor=north west, font=\itshape] at ($(current page.north west) + (\xfrontshift, -\yshift) + (\bwidth*0.3, -\bheight)$)
-        {\large What has never worked can never be lost};
-
 \end{tikzpicture}
-
-
-\rulercircle{0.5*\xfrontshift}{-0.5*\yshift}
-
-\rulerhorz{0.5cm}{-1.5cm-\yshift-\coverheight}
-
-\rulervert{1.5cm+\xfrontshift+\coverwidth}{-0.5cm}
-
-
 
 
 \end{document}

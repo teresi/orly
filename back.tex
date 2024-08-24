@@ -8,45 +8,16 @@
 
 %%% FRAME %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% perimeter
-\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}]
-%    \draw[draw=black] (\xshift, -\yshift) rectangle ++(\pagewidth pt,-\pageheight pt);  % front cover
-%    \draw[draw=black] (\xshift, -\yshift) rectangle ++(\coverwidth pt, -\coverheight pt);  % back cover
-%    \draw[draw=black] (\xshift + 0.5*\coverwidth pt, -\yshift) rectangle ++(0, -\pageheight pt);  % back cover, midpoint
-\end{tikzpicture}
-
-
+\showframe
 \cutlines
 
 
 %%% BACKCOVER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% top banner
+
 % centering text
 % https://www.reddit.com/r/LaTeX/comments/s1sx1w/tikz_centering_text_from_a_node/
-\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xshift, yshift=-\yshift]
 
-    \node[anchor=north west] at ($(current page.north west) + (\xshift, -\yshift) + (\bmargin, -1*\bheight)$)
-        {\backsubtitle};
-
-    \node[anchor=north west] at ($(current page.north west) + (\xshift, -\yshift) + (0.4*\coverwidth pt, -1.8*\bheight)$)
-        {\huge \oreilly O'RLY\small$^\textsuperscript{\textregistered}$};
-
-    \filldraw [fill=\bcolor, draw=\bcolor] (\bmargin, -4*\bheight) rectangle ++(\bwidth, -\bheight);
-
-    \node[anchor=north west] at ($(current page.north west) + (\xshift, -\yshift) + (\bmargin, -5.5*\bheight)$)
-        {\huge \textbf Navigating Legacy Code};
-
-    \node[anchor=north west, text width=\bwidth] at ($(current page.north west) + (\xshift, -\yshift) + (\bmargin, -7.75*\bheight)$)
-        {\lipsum[3-4]};
-\end{tikzpicture}
-
-% barcode
-% NOTE something is wrong with the coordinates of the barcode, it doesn't respect the units or location
-% placing it through trial and error
-\begin{pspicture}(0,0)
-    \psbarcode[transy=-18.4cm, transx=0.4cm]{0080085}{includetext height=0.4 width=0.8}{upce}
-\end{pspicture}
-
+\backcover{Navigating Legacy Code}{Unix Programming}
 
 
 \end{document}
