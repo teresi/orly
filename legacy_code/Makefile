@@ -15,7 +15,7 @@ _obj := $(patsubst %.tex, %.pdf, $(_src))
 all: $(_obj)
 
 
-%.pdf: %.tex orly.cls
+%.pdf: %.tex ../orly.cls
 	max_print_line=96 latexmk -xelatex -time -use-make $<
 
 

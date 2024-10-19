@@ -6,8 +6,9 @@
 
 \documentclass[
     papersize={17in,11in}
-]{orly}
+]{../orly}
 
+\graphicspath{{../img/}}
 \renewcommand{\pagewidth}{\fpeval{\coverwidth * 2 + \spinewidth}}  % combined cover width
 \renewcommand{\pageheight}{\coverheight}                            % combined cover height
 
@@ -62,7 +63,7 @@
     % animal
     % NOTE this image does not line up with the rectangles, is there a hidden space? Had to hard code this
     \node[anchor=north] at ($(current page.north west) + (\xspineshift+0.5*\spinewidth, -\yshift-8.8pt)$)
-        {\includegraphics[height=1.5cm,width=1.1 cm, trim={0 90 0 0}, clip]{./img/sunwave}};
+        {\includegraphics[height=1.5cm,width=1.1 cm, trim={0 90 0 0}, clip]{sunwave}};
     \filldraw [fill=black, draw=black] (0, 0) rectangle ++(\spinewidth pt, -12 pt);
     \filldraw [fill=black, draw=black] (0, -1.5cm -12pt) rectangle ++(\spinewidth pt, -12 pt);
 
@@ -96,7 +97,7 @@
 % animal
 \begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)} ]
     \node[anchor=north] at ($(current page.north west) + (\xfrontshift, -\yshift) + (0.25*\pagewidth pt, -4.0*\bheight)$)
-    {\includegraphics[height=9cm]{./img/sunwave}};
+    {\includegraphics[height=9cm]{sunwave}};
 \end{tikzpicture}
 
 % title

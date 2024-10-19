@@ -3,7 +3,9 @@
 
 \documentclass[
     papersize={8.5in,11in}
-]{orly}
+]{../orly}
+
+\graphicspath{{../img/}}
 
 \begin{document}
 
@@ -33,7 +35,7 @@
 % animal
 \begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-\yshift]
     \node[anchor=north] at + ($(0.5*\coverwidth pt, -3.7*\bheight)$)
-    {\includegraphics[height=8.5cm]{./img/sunwave}};
+    {\includegraphics[height=8.5cm]{sunwave}};
 \end{tikzpicture}
 
 
