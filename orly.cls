@@ -101,15 +101,21 @@
     \end{tikzpicture}
 }
 
-\newcommand\topbanner[0]{
+% colored rectangle at the top of the front cover
+\newcommand\topbanner[1]{
     \begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-\yshift]
+
+        % the colored banner at the top
         \filldraw [fill=\bcolor, draw=\bcolor] (\bmargin, 0) rectangle ++(\bwidth, -\bheight);
+        % add a little extra bleed make it easier to cut
+        \filldraw [fill=\bcolor, draw=\bcolor] (\bmargin, 0) rectangle ++(\bwidth, +2mm);
 
         \node[anchor=north west, font=\itshape] at + ($(\bwidth*0.3, -\bheight)$)
-            {\large What has never worked can never be lost};
+            {\large #1};
     \end{tikzpicture}
 }
 
+% test below the rectangle on the front page
 \newcommand\titlebanner[0]{
     \begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-\yshift]
         \filldraw [fill=\bcolor, draw=white] (\bmargin, \titleoffset pt) rectangle ++(\bwidth, -\titleheight pt);

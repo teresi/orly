@@ -1,0 +1,31 @@
+% !TEX TS-program = XeLaTeX      Must use XeLaTeX to compile
+% !TEX encoding = UTF-8 Unicode  File must be encoded at UTF-8
+
+\documentclass{../orly}
+
+\definecolor{michiganGreen}{RGB}{24, 69, 59}
+\renewcommand{\bcolor}{michiganGreen}           % banner color
+
+\begin{document}
+
+
+
+%%% FRAME %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\showframe
+\cutlines
+
+\rulercircle{0.5*\xfrontshift}{-0.5*\yshift}
+\rulerhorz{0.5 cm}{-1.5 cm-\yshift-\coverheight}
+\rulervert{1.5 cm+\xfrontshift+\coverwidth}{-0.5 cm}
+
+
+%%% BACKCOVER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% centering text
+% https://www.reddit.com/r/LaTeX/comments/s1sx1w/tikz_centering_text_from_a_node/
+
+\backcover{Navigating Legacy Code}{Unix Programming}
+
+
+\end{document}

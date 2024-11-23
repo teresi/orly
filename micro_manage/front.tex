@@ -6,6 +6,8 @@
 ]{../orly}
 
 \graphicspath{{../img/}}
+\renewcommand{\bcolor}{data}           % banner color
+
 
 \begin{document}
 
@@ -19,7 +21,7 @@
 
 %%% FRAME %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\showframe
+%\showframe
 \cutlines
 
 \rulercircle{0.5*\xfrontshift}{-0.5*\yshift}
@@ -29,26 +31,33 @@
 
 %%% FRONT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\topbanner{What has never worked can never be lost}
-\titlebanner
+\topbanner
 
-% animal
+% FUTURE center justify text automatically and use the \titlebanner
 \begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-\yshift]
-    \node[anchor=north] at + ($(0.5*\coverwidth pt, -3.7*\bheight)$)
-    {\includegraphics[height=8.5cm]{sunwave}};
+    \node[anchor=north west, font=\itshape] at + ($(\bwidth*0.36, -\bheight)$)
+        {\large A guide to solving fake requirements};
 \end{tikzpicture}
 
 
 \begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-\yshift]
+    \node[anchor=north] at + ($(0.50*\coverwidth pt, -10*\bheight)$)
+    {\includegraphics[width=10.5cm]{vipers}};
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-0.85*\yshift]
+
+    \filldraw [fill=\bcolor, draw=white] (\bmargin, \titleoffset*1.1 pt) rectangle ++(\bwidth, -\titleheight*0.7 pt);
 
     \node[anchor=north west, font=\itshape, scale=1.2] at + ($(\bmargin, \titleoffset+1*\bmargin)$)
-        {\Huge Navigating};
+        {\Huge };
 
-    \node[anchor=north west, text=white, scale=3, text width=0.9*\bwidth] at + ($(\bmargin*1.2, \titleoffset pt - 0.5*\bmargin)$)
-        {\Huge Legacy\\ Code};
+    \node[anchor=north west, text=white, scale=1.78, text width=0.9*\bwidth] at + ($(\bmargin*1.05, \titleoffset pt - 1.15*\bmargin)$)
+        {\Huge Agile Project\\\vskip8pt Micromanagement};
 
-    \node[anchor=north west, font=\itshape] at + ($(\bwidth*0.77, \titleoffset-\titleheight-0.65*\bheight)$)
-        {\Large advanced rm -rf *};
+    \node[anchor=north west, font=\itshape] at + ($(\bwidth*0.68, \titleoffset*0.95-\titleheight-0.55*\bheight)$)
+        {\Large Waterfall with extra steps};
 \end{tikzpicture}
 
 
@@ -57,8 +66,9 @@
         {\huge \oreilly O'RLY\small$^\textsuperscript{\textregistered}$};
 
     % TODO there must be a better way; how to justify text in the node?
-    \node[anchor=north west, font=\itshape] at ($(current page.south west) + (\xfrontshift, \yshift) + (\bwidth*0.74, 3*\bheight)$)
-        {\huge Michael Teresi};
+    \node[anchor=north west, font=\itshape] at ($(current page.south west) + (\xfrontshift, \yshift) + (\bwidth*0.80, 3*\bheight)$)
+        {\huge Eric Montag};
 \end{tikzpicture}
+
 
 \end{document}
