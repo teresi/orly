@@ -33,3 +33,8 @@
 **.glo
 **.gls
 **.ist
+
+# images
+## FUTURE: consider comitting tifs? should be more foolproof
+**.png
+**.tif

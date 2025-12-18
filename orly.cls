@@ -15,7 +15,6 @@
 \RequirePackage{graphicx}
 \RequirePackage{fontspec}
 \RequirePackage{tikz}
-\RequirePackage{pst-barcode}
 \usetikzlibrary{calc}
 \RequirePackage{lipsum}
 \RequirePackage{xfp}
@@ -32,7 +31,7 @@
 \definecolor{data}{HTML}{E41736}
 
 
-% TODO should move some of these to class options
+% TODO: should move some of these to class options
 
 %%% OPTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

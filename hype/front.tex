@@ -1,0 +1,81 @@
+% !TEX TS-program = XeLaTeX      Must use XeLaTeX to compile
+% !TEX encoding = UTF-8 Unicode  File must be encoded at UTF-8
+
+\documentclass[
+    papersize={8.5in,11in}
+]{../orly}
+
+\graphicspath{{../img/}}
+\definecolor{michiganGreen}{RGB}{24, 69, 59}
+\definecolor{tyrianPurple}{RGB}{109, 019, 073}
+\renewcommand{\bcolor}{tyrianPurple}           % banner color
+
+
+% TODO: make front/back the same input tex file
+\begin{document}
+
+
+%%% MEASUREMENTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% front offset
+% redefine this if using in the dust cover
+\renewcommand{\xfrontshift}{\fpeval{\xshift}pt}
+
+
+%%% FRAME %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\showframe
+\cutlines
+
+\rulercircle{0.5*\xfrontshift}{-0.5*\yshift}
+\rulerhorz{0.5 cm}{-1.5 cm-\yshift-\coverheight}
+\rulervert{1.5 cm+\xfrontshift+\coverwidth}{-0.5 cm}
+
+
+%%% FRONT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\topbanner
+
+% FUTURE center justify text automatically and use the \titlebanner
+% top tag line
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-\yshift]
+    \node[anchor=north west, font=\itshape] at + ($(\bwidth*0.3, -\bheight)$)
+        {\large It only works if everyone drinks the KoolAid};
+\end{tikzpicture}
+
+
+% image
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-\yshift]
+    \node[anchor=north] at + ($(0.5*\coverwidth pt, -6.0*\bheight)$)
+    {\includegraphics[height=7.25cm]{gladiators2}};
+\end{tikzpicture}
+
+
+% text in & around image
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-0.85*\yshift]
+
+    \filldraw [fill=\bcolor, draw=white] (\bmargin, \titleoffset pt) rectangle ++(\bwidth, -\titleheight pt);
+
+    \node[anchor=north west, font=\itshape, scale=1.2] at + ($(\bmargin, \titleoffset+1*\bmargin)$)
+        {\Huge };
+
+    \node[anchor=north west, text=white, scale=2.4, text width=0.9*\bwidth] at + ($(\bmargin*1.2, \titleoffset pt - 0.37*\bmargin)$)
+        {\Huge Hype Driven\\\vskip8pt Development};
+
+    \node[anchor=north west, font=\itshape] at + ($(\bwidth*0.69, \titleoffset-\titleheight-0.65*\bheight)$)
+        {\Huge Make it work!};
+\end{tikzpicture}
+
+
+% bottom text
+\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-\yshift]
+    \node[anchor=north west] at ($(current page.south west) + (\xfrontshift, \yshift) + (\bmargin, 3*\bheight)$)
+        {\huge \oreilly O'RLY\small$^\textsuperscript{\textregistered}$};
+
+    % TODO there must be a better way; how to justify text in the node?
+    \node[anchor=north west, font=\itshape] at ($(current page.south west) + (\xfrontshift, \yshift) + (\bwidth*0.83, 3*\bheight)$)
+        {\huge Scott Teresi};
+\end{tikzpicture}
+
+
+\end{document}
