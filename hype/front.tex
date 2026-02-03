@@ -45,9 +45,10 @@
 
 
 % image
+% crop the top slightly for the gladiators2 to remove the smudge
 \begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}, xshift=\xfrontshift, yshift=-\yshift]
     \node[anchor=north] at + ($(0.5*\coverwidth pt, -6.0*\bheight)$)
-    {\includegraphics[height=7.25cm]{gladiators2}};
+    {\includegraphics[height=7.25cm,clip=true,trim={0 0 0 2pt}]{gladiators2}};
 \end{tikzpicture}
 
 
@@ -62,7 +63,7 @@
     \node[anchor=north west, text=white, scale=2.4, text width=0.9*\bwidth] at + ($(\bmargin*1.2, \titleoffset pt - 0.37*\bmargin)$)
         {\Huge Hype Driven\\\vskip8pt Development};
 
-    \node[anchor=north west, font=\itshape] at + ($(\bwidth*0.69, \titleoffset-\titleheight-0.65*\bheight)$)
+    \node[anchor=north west, font=\itshape] at + ($(\bwidth*0.70, \titleoffset-\titleheight-0.65*\bheight)$)
         {\Huge Make it work!};
 \end{tikzpicture}
 
@@ -73,7 +74,7 @@
         {\huge \oreilly O'RLY\small$^\textsuperscript{\textregistered}$};
 
     % TODO there must be a better way; how to justify text in the node?
-    \node[anchor=north west, font=\itshape] at ($(current page.south west) + (\xfrontshift, \yshift) + (\bwidth*0.83, 3*\bheight)$)
+    \node[anchor=north west, font=\itshape] at ($(current page.south west) + (\xfrontshift, \yshift) + (\bwidth*0.82, 3*\bheight)$)
         {\huge Scott Teresi};
 \end{tikzpicture}
 

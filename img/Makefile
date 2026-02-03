@@ -16,14 +16,13 @@ MAKEFLAGS += --no-print-directory
 IMG_MAGICK_FLAGS += -intensity average -colorspace gray -fuzz 25% -transparent white
 _root_dir := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-#SRC := src
 #TIF := gaul.tif vipers.tif gladiators.tif gladiators2.tif
 #PNG := $(patsubst %.tif,%.png,$(TIF))
 
 
 #.PHONY: all
 #all: $(PNG)
-
+#
 #.PHONY: clean
 #clean:
 #	rm -rf $(TIF)
@@ -42,4 +41,6 @@ _root_dir := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 #
 #gladiators.tif:
 #	wget https://etc.usf.edu/clipart/73100/73123/73123_gladiators.tif -O $@
-
+#
+#gladiators2.tif:
+#	wget https://etc.usf.edu/clipart/87000/87089/87089_gladiators.tif -O $@

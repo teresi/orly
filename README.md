@@ -19,6 +19,7 @@ make
 ----
 
 ## GOALS
+
 - print and glue the cover to a notebook
 - use realistic colors and fonts
 - use strange animals as the mascot
@@ -57,6 +58,8 @@ I used a third party printing service for the water-resistant paper, color ink, 
     - Copies & Custom Documents
     - "Full Color"
     - "Water Resistant (7.7 Mil)"
+    - 8.5 x 11 inch
 4) Mail or call the site and ask for 1:1 scaling
     - otherwise they will shrink to fit
-    - A5 is smaller than the printable area, there isn't anything we need in the margin
+    - A5 is smaller than the printable area
+    - there isn't anything we need in the margin, but cut guides are included
